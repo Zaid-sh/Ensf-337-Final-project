@@ -1,22 +1,27 @@
+#include <fstream>
+#include <iostream>
+#include <cstring>
+using namespace std;
+
 class Seat{
     public:
-    int get_row()const { return row; }
-    int get_column()const  { return column; }
-    bool get_occ()const { return occ; }
-    int get_PassID()const { return PassID; }
-    int get_FID()const { return FID; }
-    void set_occ(bool occN) { occ = occN; }
-    void set_PassID(int PassIDN) { PassID = PassIDN; }
-    void set_FID(int FIDN) { FID = FIDN; }
-    void set_row(int rowN) { row = rowN; }
-    void set_column(int colN) { column = colN; }
+    int get_Row()const { return sRow; }
+    int get_Column()const  { return sColumn; }
+    bool get_Occ()const { return sOcc; }
+    int get_PassID()const { return sPassID; }
+    int get_FID()const { return sFID; }
+    void set_Occ(bool occN) { sOcc = occN; }
+    void set_PassID(int PassIDN) { sPassID = PassIDN; }
+    void set_FID(int FIDN) { sFID = FIDN; }
+    void set_Row(int rowN) { sRow = rowN; }
+    void set_Column(int colN) { sColumn = colN; }
     Seat (int row, int column, bool occ, int PassID, int FID);
     ~Seat();
 
     private:
-    int row;
-    int column;
-    bool occ;
-    int PassID;
-    int FID;
+    int sRow;
+    int sColumn;
+    bool sOcc;
+    int sPassID;
+    int sFID;
 };
