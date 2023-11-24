@@ -3,7 +3,8 @@
 #include <cstring>
 using namespace std;
 
-
+#ifndef AIRLINE_H
+#define AIRLINE_H
 
 class Airline{
     public:
@@ -20,4 +21,6 @@ class Airline{
     string aName;
     vector<Flight>aFlight;
     int aNumFlight;
-}
+};
+
+#endif

@@ -3,6 +3,8 @@
 #include <cstring>
 using namespace std;
 
+#ifndef FLIGHT_H
+#define FLIGHT_H
 
 class Flight{
     public:
@@ -13,3 +15,5 @@ class Flight{
     vector<Passenger> Passengers;
     vector<vector<seat>seatmap>;
 };
+
+#endif

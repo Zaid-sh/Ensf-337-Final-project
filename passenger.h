@@ -3,6 +3,8 @@
 #include <cstring>
 using namespace std;
 
+#ifndef PASSENGER_H
+#define PASSENGER_H
 
 class Passenger{
     public:
@@ -25,3 +27,5 @@ class Passenger{
     int pID;
     int pFID;
 };
+
+#endif

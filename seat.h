@@ -3,6 +3,9 @@
 #include <cstring>
 using namespace std;
 
+#ifndef SEAT_H
+#define SEAT_H
+
 class Seat{
     public:
     int get_Row()const { return sRow; }
@@ -25,3 +28,5 @@ class Seat{
     int sPassID;
     int sFID;
 };
+
+#endif
