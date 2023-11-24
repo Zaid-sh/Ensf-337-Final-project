@@ -20,7 +20,7 @@ class Passenger{
     private:
     string pFname;
     string pLname;
-    seat* pSeat;
+    Seat* pSeat;
     string pPhone;
     int pID;
     int pFID;
