@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstring>
 using namespace std;
+#include "seat.h"
 
 #ifndef PASSENGER_H
 #define PASSENGER_H
