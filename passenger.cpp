@@ -24,5 +24,7 @@ Passenger :: add_passenger (char* file){
 
     out << pFname << pLname << pPhone << pSeat->sRow << pSeat->sColumn << pID;
 
+    out.close();
+
     return 0;
 }
