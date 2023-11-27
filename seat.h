@@ -15,7 +15,7 @@ class Seat{
     void set_FID(int FIDN) { sFID = FIDN; }
     void set_Row(int rowN) { sRow = rowN; }
     void set_Column(int colN) { sColumn = colN; }
-    Seat (int row, int column, bool occ, int PassID, int FID);
+    Seat (int row, int column, bool occ, int PassID = null, int FID = null);
     ~Seat();
 
     private:
