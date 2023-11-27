@@ -22,7 +22,7 @@ Passenger :: add_passenger (char* file){
     cout << "Enter the passenger's desired seat: " << endl;
     cin >> pSeat -> sColumn;
 
-    out << pFname << pLname << pPhone << pSeat->sRow << pSeat->sColumn << pID;
+    out << '\n' << left << setw(20) << pFname << setw(20) << pLname << setw(20) << pPhone << sRow << setw(1) << sColumn << right << setw(6) << pID;
 
     out.close();
 

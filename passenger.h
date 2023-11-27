@@ -3,6 +3,7 @@
 #include <string>
 using namespace std;
 #include "seat.h"
+#include <iomanip>
 
 #ifndef PASSENGER_H
 #define PASSENGER_H
