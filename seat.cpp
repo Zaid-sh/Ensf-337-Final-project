@@ -9,6 +9,14 @@ Seat::Seat(int row, int column, bool occ, int PassID, int FID)
     seat = new Seat;
 }
 
+Seat::Seat() {
+    sRow = -1;
+    sColumn = -1;
+    sOcc = 0;
+    sPassID = -1;
+    sFID = -1;
+}
+
 Seat::~Seat() {
         delete seat;
     }
