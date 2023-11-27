@@ -5,6 +5,9 @@ using namespace std;
 
 int main()
 {
+	Passenger *p;
+	string file("flight_info");
+	#if 0
     int choice = 1;
     while (choice != 0)
     {
@@ -33,6 +36,8 @@ int main()
                 break;
         }
     }
+	#endif
+	p->add_passenger();
     return 0;
 }
 

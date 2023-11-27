@@ -6,9 +6,19 @@ using namespace std;
 
 Seat::Seat(int row, int column, bool occ, int PassID, int FID)
     : sRow(row), sColumn(column), sOcc(occ), sPassID(PassID), sFID(FID) {
-    seat = new Seat;
+    //Seat = new Seat;
 }
 
-Seat::~Seat() {
-        delete seat;
-    }
+Seat::Seat() {
+    sRow = -1;
+    sColumn = -1;
+    sOcc = 0;
+    sPassID = -1;
+    sFID = -1;
+}
+#if 0
+Seat::~Seat() 
+{
+	delete Seat;
+}
+#endif
