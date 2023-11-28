@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-#include "flight.h"
-
-Flight :: populate_flight (char* file){
-    ifstream in(file, ios::r);
-    if (in.fail()){
-        cout << "File could not be opened"<< endl;
-        exit(1);
-    }
-
-}
-=======
 
 #include "Flight.h"
 
@@ -52,4 +40,3 @@ void Flight::displaySeatMap() const {
     }
 }
 
->>>>>>> 6acee0e05e98bcc7f89fb2a2ae3ec1e77007e345

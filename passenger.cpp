@@ -63,5 +63,14 @@ void Passenger::sub_passenger()
 
 void Passenger::display_passenger()
 {
+    cout << setw(15) << left << "First Name"
+            << setw(15) << left << "Last Name"
+            << setw(15) << left << "Phone" 
+            << setw(7) << left << "Row"
+            << setw(10) << left << "Seat"
+            << setw(10) << left << "ID"
+            << endl;
+    cout << setfill('-') << setw(65) << "" << setfill(' ') << endl;
+
     
 }
