@@ -4,3 +4,7 @@
 #include "airline.cpp"
 #include "flight.cpp"
 #endif
+
+int menu();
+
+void Press_Enter();

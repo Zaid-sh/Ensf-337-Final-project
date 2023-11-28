@@ -7,25 +7,25 @@ int main()
 {
 	Passenger *p;
 	string file("flight_info");
-	#if 0
+	#if 1
     int choice = 1;
     while (choice != 0)
     {
         switch (menu()){
             case 1:
-                flight_seat_map();
+                //flight_seat_map();
                 Press_Enter();
                 break;
             case 2:
-                display_passenger();
+                p->display_passenger();
                 Press_Enter();
                 break;
             case 3:
-                add_passenger();
+                p->add_passenger();
                 Press_Enter();
                 break;
             case 4:
-                remove_passenger();
+                p->sub_passenger();
                 Press_Enter();
                 break;
             case 5:
@@ -37,7 +37,6 @@ int main()
         }
     }
 	#endif
-	p->add_passenger();
     return 0;
 }
 
@@ -55,4 +54,14 @@ int menu()
 
     return choice;
 
+}
+
+void Press_Enter()
+{
+    int a = 1;
+    cout << "<<< Press Return to Continue >>>" << endl;
+    while( a = cin.get()){
+        if (a == (int)'\n')
+            break;
+    }
 }

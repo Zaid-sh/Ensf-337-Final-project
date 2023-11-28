@@ -18,9 +18,9 @@ class Passenger{
     void set_Lname(string Lname);
     void set_Phone(string Phone);
     void set_ID(int ID);
-    int add_passenger();
-    int sub_passenger(char* file);
-    int display_passenger(char* file);
+    void add_passenger();
+    void sub_passenger();
+    void display_passenger();
     Passenger ();
 
     private:

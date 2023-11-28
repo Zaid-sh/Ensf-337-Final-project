@@ -10,15 +10,20 @@ Seat::Seat(int row, int column, bool occ, int PassID, int FID)
 }
 
 Seat::Seat() {
-    sRow = -1;
-    sColumn = -1;
-    sOcc = 0;
-    sPassID = -1;
-    sFID = -1;
+    int* sRow = new int;
+    int* sColumn = new int;
+    sOcc = new bool;
+    int* sPassID = new int;
+    int* sFID = new int;
 }
 #if 0
 Seat::~Seat() 
 {
 	delete Seat;
+    delete sRow;
+    delete sColumn;
+    delete sOcc;
+    delete sPassID;
+    delete sFID;
 }
 #endif

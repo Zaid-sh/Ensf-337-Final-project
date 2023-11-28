@@ -8,7 +8,7 @@ Passenger::Passenger(): pID(0)
     Seat* pSeat = nullptr;
 }
 
-int Passenger::add_passenger ()
+void Passenger::add_passenger ()
 {
     Seat s;
 	pSeat = &s;
@@ -43,5 +43,25 @@ int Passenger::add_passenger ()
 
     out.close();
 
-    return 0;
+}
+
+void Passenger::sub_passenger()
+{
+    ofstream out("flight_info.txt", ios::app);
+    if (out.fail())
+    {
+        cout << "File could not be opened"<< endl;
+        exit(1); 
+    }
+
+    cout << "Please enter the if of the passenger that needs to be removed: " << endl;
+    cin >> pID;
+
+    //while (!out.eof())
+   
+}
+
+void Passenger::display_passenger()
+{
+    
 }
