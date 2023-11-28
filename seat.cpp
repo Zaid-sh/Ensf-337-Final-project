@@ -10,13 +10,17 @@ Seat::Seat(int row, int column, bool occ, int PassID, int FID)
 }
 
 Seat::Seat() {
-    sRow = -1;
-    sColumn = -1;
-    sOcc = 0;
-    sPassID = -1;
-    sFID = -1;
+    sRow = new int;
+    sColumn = new int;
+    sOcc = new bool;
+    sPassID = new int;
+    sFID = new int;
 }
 
 Seat::~Seat() {
-        delete seat;
+        delete sRow;
+        delete sColumn;
+        delete sOcc;
+        delete sPassID;
+        delete sFID;
     }
