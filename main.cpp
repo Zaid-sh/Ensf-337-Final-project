@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-	Flight *p;
+	Passenger *p;
 	string file("flight_info");
 	#if 1
     int choice = 1;
@@ -17,15 +17,15 @@ int main()
                 Press_Enter();
                 break;
             case 2:
-                //p->display_passenger();
+                p->display_passenger();
                 Press_Enter();
                 break;
             case 3:
-                p->add_passenger();
+                //p->add_passenger();
                 Press_Enter();
                 break;
             case 4:
-                p->sub_passenger();
+                //p->sub_passenger();
                 Press_Enter();
                 break;
             case 5:
@@ -62,7 +62,7 @@ void Press_Enter()
    // cin ignore(std::numeric);
     string temp;
     getline(cin, temp);
-    #if 0 
+    #if 0
     int a = 1;
     cout << "<<< Press Return to Continue >>>" << endl;
     while( a = cin.get()){

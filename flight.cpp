@@ -27,7 +27,7 @@ Seat* Flight::getSeat(const string& seatNumber) {
             }
         }
     }
-    return nullptr; 
+    return nullptr;
 }
 
 
@@ -40,6 +40,11 @@ void Flight::displaySeatMap() const {
     }
 }
 
+void Flight::add_passenger()
+{
+
+}
+
 
 void Flight::sub_passenger()
 {
@@ -47,7 +52,7 @@ void Flight::sub_passenger()
     if (out.fail())
     {
         cout << "File could not be opened"<< endl;
-        exit(1); 
+        exit(1);
     }
 
     cout << "Please enter the ID of the passenger that needs to be removed: " << endl;
@@ -70,6 +75,6 @@ void Flight::sub_passenger()
     for (int j = 0; j < Passengers.size(); j++){
         Passengers.push_back(tempVector[j]);
     }
-   
+
 }
 

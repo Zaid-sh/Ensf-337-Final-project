@@ -14,7 +14,8 @@ public:
     void removePassenger(const string& passengerID);
     Seat* getSeat(const string& seatNumber);
     void displaySeatMap() const;
-    
+    void sub_passenger();
+    void add_passenger();
 
 private:
     int num_rows;

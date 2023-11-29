@@ -17,6 +17,7 @@ void Passenger::clean_standard()
     } while (leftover != '\n' && leftover != EOF);
 }
 
+#if 0
 void Passenger::add_passenger ()
 {
     Seat s;
@@ -28,7 +29,7 @@ void Passenger::add_passenger ()
     if (out.fail())
     {
         cout << "File could not be opened"<< endl;
-        exit(1); 
+        exit(1);
     }
 
     cout << "Please enter the passenger's id: " << endl;
@@ -53,36 +54,25 @@ void Passenger::add_passenger ()
     out.close();
 
 }
-
-void Passenger::sub_passenger()
-{
-    ofstream out("flight_info.txt", ios::app);
-    if (out.fail())
-    {
-        cout << "File could not be opened"<< endl;
-        exit(1); 
-    }
-
-    cout << "Please enter the if of the passenger that needs to be removed: " << endl;
-    cin >> pID;
-
-    //while (!out.eof())
-   
-}
+#endif
 
 void Passenger::display_passenger()
 {
-    cout << setw(15) << left << "First Name"
-            << setw(15) << left << "Last Name"
-            << setw(15) << left << "Phone" 
+    cout << setw(20) << left << "First Name"
+            << setw(20) << left << "Last Name"
+            << setw(20) << left << "Phone"
             << setw(7) << left << "Row"
             << setw(10) << left << "Seat"
             << setw(10) << left << "ID"
             << endl;
-    cout << setfill('-') << setw(65) << "" << setfill(' ') << endl;
+    cout << setfill('-') << setw(82) << "" << setfill(' ') << endl;
 
     char s[21];
-    ifstream in("flight_info.txt");
+    string Fname, Lname, phone;
+    int row, ID, i = 0, j = 0;
+    char col;
+    ifstream in;
+    in.open("flight_info.txt");
     if (in.fail())
     {
         cout << "File failed to open" << endl;
@@ -90,9 +80,53 @@ void Passenger::display_passenger()
     }
 
     do {
-        in.get(s, 21, '\n');
-        if (in.eof()) break;
-        pFname = s;
-        //pFname = trim_trailing_spaces(pFname);
-    }while(1);
+        i++;
+        j++;
+        switch (i){
+            case 1:
+                in.get(s, 21, '\n');
+                Fname = s;
+                break;
+
+            case 2:
+                in.get(s, 21, '\n');
+                Lname = s;
+                break;
+
+            case 3:
+                in.get(s, 21, '\n');
+                phone = s;
+                break;
+
+            case 4:
+                in >> row;
+                break;
+
+            case 5:
+                in >> col;
+                break;
+
+            case 6:
+                in >> ID;
+                in.getline(s,21);
+                break;
+
+            case 7:
+                cout << setw(15) << left << Fname
+                        << setw(15) << left << Lname
+                        << setw(15) << left << phone
+                        << setw(7) << left << row
+                        << setw(10) << left << col
+                        << setw(10) << left << ID
+                        << endl;
+                cout << setfill('-') << setw(82) << "" << setfill(' ') << endl;
+                i = 0;
+                break;
+        }
+       // Fname = trim_trailing_spaces(Fname);
+
+    }while( !in.eof() );
+
+    in.close();
+
 }
