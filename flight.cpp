@@ -40,3 +40,36 @@ void Flight::displaySeatMap() const {
     }
 }
 
+
+void Flight::sub_passenger()
+{
+    ofstream out("flight_info.txt", ios::app);
+    if (out.fail())
+    {
+        cout << "File could not be opened"<< endl;
+        exit(1); 
+    }
+
+    cout << "Please enter the ID of the passenger that needs to be removed: " << endl;
+    cin >> pID;
+
+    removeID = stoi(pID);
+    tempVector = new Passenger[Passengers.size() - 1];
+    for (int i = 0; i < Passengers.size(); i++) {
+        if (Passengers[i].pID == removeID) {
+            Passengers[i].pSeat->sOcc = 0;
+            Passengers.erase(i);
+        }
+        else {
+            tempVector.push_back(Passengers[i]);
+        }
+    }
+
+    Passengers.clear();
+    Passengers.resize(Passengers.size() - 1);
+    for (int j = 0; j < Passengers.size(); j++){
+        Passengers.push_back(tempVector[j]);
+    }
+   
+}
+
