@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-	Passenger *p;
+	Flight *p;
 	string file("flight_info");
 	#if 1
     int choice = 1;
@@ -17,7 +17,7 @@ int main()
                 Press_Enter();
                 break;
             case 2:
-                p->display_passenger();
+                //p->display_passenger();
                 Press_Enter();
                 break;
             case 3:
@@ -58,10 +58,16 @@ int menu()
 
 void Press_Enter()
 {
+    cout << "<<< Press Return to Continue >>>" << endl;
+   // cin ignore(std::numeric);
+    string temp;
+    getline(cin, temp);
+    #if 0 
     int a = 1;
     cout << "<<< Press Return to Continue >>>" << endl;
     while( a = cin.get()){
         if (a == (int)'\n')
             break;
     }
+    #endif
 }

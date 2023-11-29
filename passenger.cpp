@@ -8,6 +8,15 @@ Passenger::Passenger(): pID(0)
     Seat* pSeat = nullptr;
 }
 
+void Passenger::clean_standard()
+{
+    int leftover;
+    do{
+        leftover = cin.get();
+
+    } while (leftover != '\n' && leftover != EOF);
+}
+
 void Passenger::add_passenger ()
 {
     Seat s;
@@ -25,11 +34,11 @@ void Passenger::add_passenger ()
     cout << "Please enter the passenger's id: " << endl;
     cin >> pID;
     cout << "Please enter the passenger's first name: " << endl;
-    cin >> pFname;
+    getline(cin, pFname);
     cout << "Please enter the passenger's last name: " << endl;
-    cin >> pLname;
+    getline(cin, pLname);
     cout << "Please enter the passenger's phone number: " << endl;
-    cin >> pPhone;
+    getline(cin, pPhone);
     cout << " " << endl;
     cout << "Enter the passenger's desired row: " << endl;
     cin >> row;
@@ -72,5 +81,18 @@ void Passenger::display_passenger()
             << endl;
     cout << setfill('-') << setw(65) << "" << setfill(' ') << endl;
 
-    
+    char s[21];
+    ifstream in("flight_info.txt");
+    if (in.fail())
+    {
+        cout << "File failed to open" << endl;
+        exit(1);
+    }
+
+    do {
+        in.get(s, 21, '\n');
+        if (in.eof()) break;
+        pFname = s;
+        //pFname = trim_trailing_spaces(pFname);
+    }while(1);
 }

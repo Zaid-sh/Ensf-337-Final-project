@@ -21,6 +21,7 @@ class Passenger{
     void add_passenger();
     void sub_passenger();
     void display_passenger();
+    void clean_standard();
     Passenger ();
 
     private:
