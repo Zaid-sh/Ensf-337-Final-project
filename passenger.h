@@ -1,27 +1,33 @@
 #include <fstream>
 #include <iostream>
-#include <cstring>
+#include <string>
 using namespace std;
+#include "seat.h"
+#include <iomanip>
 
+#ifndef PASSENGER_H
+#define PASSENGER_H
 
 class Passenger{
     public:
     string get_Fname()const { return pFname; }
     string get_Lname()const { return pLname; }
-    int get_Phone()const { return pPhone; }
+    string get_Phone()const { return pPhone; }
     int get_ID()const { return pID; }
-    int get_FID()const { return pFID; }
-    void set_Fname(string Fname);
-    void set_Lname(string Lname);
-    void set_Phone(int Phone);
-    void set_ID(int ID);
-    void set_FID(int FID);
+    void set_Fname(string Fname) { pFname = Fname; };
+    void set_Lname(string Lname) { pLname = Lname; };
+    void set_Phone(string Phone) { pPhone = Phone; };
+    void set_ID(int ID) { pID = ID; };
+    void set_pSeat (int prow, char pcol, bool pOcc);
+    void clean_standard();
+    Passenger ();
 
     private:
     string pFname;
     string pLname;
-    seat* pSeat;
+    Seat* pSeat;
     string pPhone;
     int pID;
-    int pFID;
 };
+
+#endif

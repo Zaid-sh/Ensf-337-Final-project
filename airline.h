@@ -2,8 +2,10 @@
 #include <iostream>
 #include <cstring>
 using namespace std;
+#include "flight.h"
 
-
+#ifndef AIRLINE_H
+#define AIRLINE_H
 
 class Airline{
     public:
@@ -18,6 +20,8 @@ class Airline{
 
     private:
     string aName;
-    vector<Flight>aFlight;
+    vector<flight>aFlight;
     int aNumFlight;
-}
+};
+
+#endif

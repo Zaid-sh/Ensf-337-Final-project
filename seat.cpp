@@ -6,21 +6,24 @@ using namespace std;
 
 Seat::Seat(int row, int column, bool occ, int PassID, int FID)
     : sRow(row), sColumn(column), sOcc(occ), sPassID(PassID), sFID(FID) {
-    seat = new Seat;
+    //Seat = new Seat;
 }
 
 Seat::Seat() {
-    sRow = new int;
-    sColumn = new int;
+    int* sRow = new int;
+    int* sColumn = new int;
     sOcc = new bool;
-    sPassID = new int;
-    sFID = new int;
+    int* sPassID = new int;
+    int* sFID = new int;
 }
-
-Seat::~Seat() {
-        delete sRow;
-        delete sColumn;
-        delete sOcc;
-        delete sPassID;
-        delete sFID;
-    }
+#if 0
+Seat::~Seat() 
+{
+	delete Seat;
+    delete sRow;
+    delete sColumn;
+    delete sOcc;
+    delete sPassID;
+    delete sFID;
+}
+#endif

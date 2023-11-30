@@ -1,7 +1,11 @@
+#include <stdio.h>
 #include <fstream>
 #include <iostream>
 #include <cstring>
 using namespace std;
+
+#ifndef SEAT_H
+#define SEAT_H
 
 class Seat{
     public:
@@ -15,8 +19,9 @@ class Seat{
     void set_FID(int FIDN) { sFID = FIDN; }
     void set_Row(int rowN) { sRow = rowN; }
     void set_Column(int colN) { sColumn = colN; }
-    Seat (int row, int column, bool occ, int PassID = null, int FID = null);
-    ~Seat();
+    Seat();
+    Seat (int row, int column, bool occ, int PassID, int FID);
+    //~Seat();
 
     private:
     int sRow;
@@ -25,3 +30,5 @@ class Seat{
     int sPassID;
     int sFID;
 };
+
+#endif
