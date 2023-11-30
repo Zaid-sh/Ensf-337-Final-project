@@ -47,11 +47,13 @@ Seat* Flight::getSeat(const string& seatNumber) {
 #endif
 
 void Flight::displaySeatMap() const {
-    for (const auto& row : seatMap) {
-        for (const Seat& seat : row) {
-            cout << (seat.get_Occ() ? "X" : "O") << " ";
+    
+    for (int i = 0; i < num_rows; i++) {
+        for (int j = 0; j < num_cols; j++) {
+            cout << seatMap[i][j].getSeatNumber() << " ";
         }
-        cout << endl;
+        cout << "
+";
     }
 }
 
