@@ -3,17 +3,19 @@
 using namespace std;
 #include "main.h"
 
+Flight f;
+Flight *p;
+
+
 int main()
 {
-	Passenger *p;
-	string file("flight_info");
-	#if 1
+    p = &f;
     int choice = 1;
     while (choice != 0)
     {
         switch (menu()){
             case 1:
-                //flight_seat_map();
+                p->displaySeatMap();
                 Press_Enter();
                 break;
             case 2:
@@ -21,7 +23,7 @@ int main()
                 Press_Enter();
                 break;
             case 3:
-                //p->add_passenger();
+                p->add_passenger();
                 Press_Enter();
                 break;
             case 4:
@@ -36,7 +38,7 @@ int main()
                 break;
         }
     }
-	#endif
+
     return 0;
 }
 
@@ -53,21 +55,12 @@ int menu()
     cin >> choice;
 
     return choice;
-
 }
 
 void Press_Enter()
 {
     cout << "<<< Press Return to Continue >>>" << endl;
-   // cin ignore(std::numeric);
     string temp;
+    p->clean_standard();
     getline(cin, temp);
-    #if 0
-    int a = 1;
-    cout << "<<< Press Return to Continue >>>" << endl;
-    while( a = cin.get()){
-        if (a == (int)'\n')
-            break;
-    }
-    #endif
 }

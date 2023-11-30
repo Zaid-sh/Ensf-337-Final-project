@@ -14,13 +14,11 @@ class Passenger{
     string get_Lname()const { return pLname; }
     string get_Phone()const { return pPhone; }
     int get_ID()const { return pID; }
-    void set_Fname(string Fname);
-    void set_Lname(string Lname);
-    void set_Phone(string Phone);
-    void set_ID(int ID);
-    void add_passenger();
-    void sub_passenger();
-    void display_passenger();
+    void set_Fname(string Fname) { pFname = Fname; };
+    void set_Lname(string Lname) { pLname = Lname; };
+    void set_Phone(string Phone) { pPhone = Phone; };
+    void set_ID(int ID) { pID = ID; };
+    void set_pSeat (int prow, char pcol, bool pOcc);
     void clean_standard();
     Passenger ();
 
