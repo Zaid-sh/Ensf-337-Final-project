@@ -137,9 +137,11 @@ void Flight::add_passenger(string file)
 
     out.close();
 }
-#if 0
+
 void Flight::sub_passenger(string file)
 {
+    int ID;
+
     ofstream out(file, ios::app);
     if (out.fail())
     {
@@ -148,28 +150,28 @@ void Flight::sub_passenger(string file)
     }
 
     cout << "Please enter the ID of the passenger that needs to be removed: " << endl;
-    cin >> pID;
+    cin >> ID;
 
-    removeID = stoi(pID);
-    tempVector = new Passenger[Passengers.size() - 1];
-    for (int i = 0; i < Passengers.size(); i++) {
-        if (Passengers[i].pID == removeID) {
-            Passengers[i].pSeat->sOcc = 0;
-            Passengers.erase(i);
+    int removeID = stoi(ID);
+    tempVector = new Passenger[passengers.size() - 1];
+    for (int i = 0; i < passengers.size(); i++) {
+        if (passengers[i].pID == removeID) {
+            passengers[i].pSeat->sOcc = 0;
+            passengers.erase(i);
         }
         else {
-            tempVector.push_back(Passengers[i]);
+            tempVector.push_back(passengers[i]);
         }
     }
 
-    Passengers.clear();
+    passengers.clear();
     Passengers.resize(Passengers.size() - 1);
     for (int j = 0; j < Passengers.size(); j++){
         Passengers.push_back(tempVector[j]);
     }
 
 }
-#endif
+
 void Flight::display_passenger(string file)
 {
     cout << setw(20) << left << "First Name"
