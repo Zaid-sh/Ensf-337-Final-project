@@ -9,11 +9,11 @@ Flight *p;
 
 int main()
 {
-
+    string file = "flight_info.txt";
     intro();
     Press_Enter();
     p = &f;
-    //p->populate_passengers();
+    p->populate_passengers();
     int choice = 1;
     while (choice != 0)
     {
@@ -23,22 +23,21 @@ int main()
                 Press_Enter();
                 break;
             case 2:
-                p->display_passenger();
+                p->display_passenger(file);
                 Press_Enter();
                 break;
             case 3:
-                p->add_passenger();
-                Press_Enter();
+                p->add_passenger(file);
                 break;
             case 4:
-                //p->sub_passenger();
-                Press_Enter();
+                //p->sub_passenger(file);
                 break;
             case 5:
                 Press_Enter();
                 break;
             case 6:
                 choice = 0;
+                cout << "Program terminated.";
                 break;
         }
     }

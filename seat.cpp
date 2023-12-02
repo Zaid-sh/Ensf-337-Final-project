@@ -4,20 +4,15 @@
 using namespace std;
 #include "seat.h"
 
-Seat::Seat(int row, int column, bool occ, int PassID, int FID)
-    : sRow(row), sColumn(column), sOcc(occ), sPassID(PassID), sFID(FID) {
-    //Seat = new Seat;
+Seat::Seat(int row, int column, bool occ, int PassID)
+    : sRow(row), sColumn(column), sOcc(occ), sPassID(PassID) {
 }
 
-Seat::Seat() {
-    int* sRow = new int;
-    int* sColumn = new int;
-    sOcc = new bool;
-    int* sPassID = new int;
-    int* sFID = new int;
+Seat::Seat() : sRow(0), sColumn(0), sOcc(false), sPassID(0) {
+
 }
 #if 0
-Seat::~Seat() 
+Seat::~Seat()
 {
 	delete Seat;
     delete sRow;

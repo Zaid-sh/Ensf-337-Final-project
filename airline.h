@@ -20,7 +20,7 @@ class Airline{
 
     private:
     string aName;
-    vector<flight>aFlight;
+    vector<Flight>aFlight;
     int aNumFlight;
 };
 

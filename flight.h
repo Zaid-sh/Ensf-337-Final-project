@@ -2,22 +2,23 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "Passenger.h"
-#include "Seat.h"
+#include "passenger.h"
+#include "seat.h"
 
 using namespace std;
+
+#ifndef FLIGHT_H
+#define FLIGHT_H
 
 class Flight{
 public:
     Flight();
     Flight(int num_rows, int num_cols);
-    void addPassenger(const Passenger& passenger);
-    void removePassenger(const string& passengerID);
     Seat* getSeat(const string& seatNumber);
     void displaySeatMap() const;
-    void sub_passenger();
-    void add_passenger();
-    void display_passenger();
+    void sub_passenger(string file);
+    void add_passenger(string file);
+    void display_passenger(string file);
     void clean_standard();
     void populate_passengers();
 
@@ -28,3 +29,4 @@ private:
     vector<Passenger> passengers;
     vector<vector<Seat>> seatMap;
 };
+#endif

@@ -10,17 +10,17 @@ using namespace std;
 
 class Passenger{
     public:
-    string get_Fname()const { return pFname; }
-    string get_Lname()const { return pLname; }
-    string get_Phone()const { return pPhone; }
-    int get_ID()const { return pID; }
+    Passenger();
+    Passenger(string Fname, string Lname, string Phone, int ID);
+    string get_Fname()const { return pFname; };
+    string get_Lname()const { return pLname; };
+    string get_Phone()const { return pPhone; };
+    int get_ID()const { return pID; };
     void set_Fname(string Fname) { pFname = Fname; };
     void set_Lname(string Lname) { pLname = Lname; };
     void set_Phone(string Phone) { pPhone = Phone; };
     void set_ID(int ID) { pID = ID; };
-    void set_pSeat (int prow, char pcol, bool pOcc);
-    Passenger ();
-    Passenger (string Fname, string Lname, int row, char col, int ID);
+    void set_pSeat (int prow, char pcol, bool pOcc, int ID);
 
     private:
     string pFname;

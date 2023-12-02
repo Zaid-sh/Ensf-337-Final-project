@@ -1,5 +1,5 @@
 
-#include "Flight.h"
+#include "flight.h"
 
 Flight::Flight()
 {
@@ -22,18 +22,7 @@ void Flight::clean_standard()
 Flight::Flight(int rows, int cols) : num_rows(rows), num_cols(cols) {
     seatMap.resize(num_rows, vector<Seat>(num_cols));
 }
-
-void Flight::addPassenger(const Passenger& passenger) {
-    passengers.push_back(passenger);
-}
 #if 0
-void Flight::removePassenger(const string& passengerID) {
-    passengers.erase(std::remove_if(passengers.begin(), passengers.end(),
-                                    [&](const Passenger& p) { return p.getID() == passengerID; }),
-                     passengers.end());
-}
-
-
 Seat* Flight::getSeat(const string& seatNumber) {
     for (auto& row : seatMap) {
         for (Seat& seat : row) {
@@ -62,13 +51,13 @@ void Flight::displaySeatMap() const
 
 }
 
-void Flight::add_passenger()
+void Flight::add_passenger(string file)
 {
     string Fname, Lname, Phone;
     int row, ID;
     char col;
 
-    ofstream out("flight_info.txt", ios::app);
+    ofstream out(file, ios::app);
     if (out.fail())
     {
         cout << "File could not be opened"<< endl;
@@ -93,14 +82,16 @@ void Flight::add_passenger()
 
     out << '\n' << left << setw(20) << Fname << setw(20) << Lname << setw(20) << Phone << row << setw(1) << col << right << setw(6) << ID;
 
-    passengers.push_back(Passenger(Fname, Lname, row, col, ID));
+    Passenger newPassenger(Fname, Lname, Phone, ID);
+    newPassenger.set_pSeat(row, col, 1, ID);
+    passengers.push_back(newPassenger);
 
     out.close();
 }
 #if 0
-void Flight::sub_passenger()
+void Flight::sub_passenger(string file)
 {
-    ofstream out("flight_info.txt", ios::app);
+    ofstream out(file, ios::app);
     if (out.fail())
     {
         cout << "File could not be opened"<< endl;
@@ -130,7 +121,7 @@ void Flight::sub_passenger()
 
 }
 #endif
-void Flight::display_passenger()
+void Flight::display_passenger(string file)
 {
     cout << setw(20) << left << "First Name"
             << setw(20) << left << "Last Name"
@@ -142,10 +133,10 @@ void Flight::display_passenger()
     cout << setfill('-') << setw(82) << "" << setfill(' ') << endl;
 
     char s[21];
-    string Fname, Lname, phone;
+    string dFname, dLname, dphone;
     int row, ID, i = 0;
     char col;
-    ifstream in("flight_info.txt");
+    ifstream in(file);
     if (in.fail())
     {
         cout << "File failed to open" << endl;
@@ -158,17 +149,17 @@ void Flight::display_passenger()
         switch (i){
             case 1:
                 in.get(s, 21, '\n');
-                Fname = s;
+                dFname = s;
                 break;
 
             case 2:
                 in.get(s, 21, '\n');
-                Lname = s;
+                dLname = s;
                 break;
 
             case 3:
                 in.get(s, 21, '\n');
-                phone = s;
+                dphone = s;
                 break;
 
             case 4:
@@ -185,9 +176,9 @@ void Flight::display_passenger()
                 break;
 
             case 7:
-                cout << setw(15) << left << Fname
-                        << setw(15) << left << Lname
-                        << setw(15) << left << phone
+                cout << setw(15) << left << dFname
+                        << setw(15) << left << dLname
+                        << setw(15) << left << dphone
                         << setw(7) << left << row
                         << setw(10) << left << col
                         << setw(10) << left << ID
@@ -248,7 +239,9 @@ void Flight::populate_passengers()
                 break;
 
             case 7:
-                //passengers.push_back(Passenger(Fname, Lname, row, col, ID));
+                Passenger newPassenger(Fname, Lname, phone, ID);
+                newPassenger.set_pSeat(row, col, 1, ID);
+                passengers.push_back(newPassenger);
                 i = 0;
                 break;
         }
