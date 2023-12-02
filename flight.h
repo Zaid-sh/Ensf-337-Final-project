@@ -19,6 +19,7 @@ public:
     void add_passenger();
     void display_passenger();
     void clean_standard();
+    void populate_passengers();
 
 private:
     int num_rows;

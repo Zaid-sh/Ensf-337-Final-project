@@ -7,3 +7,5 @@
 int menu();
 
 void Press_Enter();
+
+void intro();

@@ -19,8 +19,8 @@ class Passenger{
     void set_Phone(string Phone) { pPhone = Phone; };
     void set_ID(int ID) { pID = ID; };
     void set_pSeat (int prow, char pcol, bool pOcc);
-    void clean_standard();
     Passenger ();
+    Passenger (string Fname, string Lname, int row, char col, int ID);
 
     private:
     string pFname;

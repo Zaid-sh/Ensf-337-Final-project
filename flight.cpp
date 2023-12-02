@@ -56,14 +56,17 @@ void Flight::displaySeatMap() const {
     }
 }
 #endif
+
+void Flight::displaySeatMap() const
+{
+
+}
+
 void Flight::add_passenger()
 {
     string Fname, Lname, Phone;
     int row, ID;
     char col;
-
-    num_pass++;
-    passengers.resize(num_pass);
 
     ofstream out("flight_info.txt", ios::app);
     if (out.fail())
@@ -90,11 +93,7 @@ void Flight::add_passenger()
 
     out << '\n' << left << setw(20) << Fname << setw(20) << Lname << setw(20) << Phone << row << setw(1) << col << right << setw(6) << ID;
 
-    passengers.at(num_pass).set_Fname(Fname);
-    passengers.at(num_pass).set_Lname(Lname);
-    passengers.at(num_pass).set_Phone(Phone);
-    passengers.at(num_pass).set_ID(ID);
-    passengers.at(num_pass).set_pSeat(row, col, true);
+    passengers.push_back(Passenger(Fname, Lname, row, col, ID));
 
     out.close();
 }
@@ -144,7 +143,7 @@ void Flight::display_passenger()
 
     char s[21];
     string Fname, Lname, phone;
-    int row, ID, i = 0, j = 0;
+    int row, ID, i = 0;
     char col;
     ifstream in("flight_info.txt");
     if (in.fail())
@@ -156,7 +155,6 @@ void Flight::display_passenger()
 
     do {
         i++;
-        j++;
         switch (i){
             case 1:
                 in.get(s, 21, '\n');
@@ -202,4 +200,58 @@ void Flight::display_passenger()
     }while( !in.eof() );
 
     in.close();
+}
+
+void Flight::populate_passengers()
+{
+    char s[21];
+    string Fname, Lname, phone;
+    int row, ID, i = 0;
+    char col;
+    ifstream in("flight_info.txt");
+    if (in.fail())
+    {
+        cout << "File failed to open" << endl;
+        exit(1);
+    }
+    in.getline(s,21);
+
+    do {
+        i++;
+        switch (i){
+            case 1:
+                in.get(s, 21, '\n');
+                Fname = s;
+                break;
+
+            case 2:
+                in.get(s, 21, '\n');
+                Lname = s;
+                break;
+
+            case 3:
+                in.get(s, 21, '\n');
+                phone = s;
+                break;
+
+            case 4:
+                in >> row;
+                break;
+
+            case 5:
+                in >> col;
+                break;
+
+            case 6:
+                in >> ID;
+                in.getline(s,21);
+                break;
+
+            case 7:
+                //passengers.push_back(Passenger(Fname, Lname, row, col, ID));
+                i = 0;
+                break;
+        }
+
+    }while( !in.eof() );
 }
