@@ -9,32 +9,35 @@ Flight *p;
 
 int main()
 {
+    string file = "flight_info.txt";
+    intro();
+    Press_Enter();
     p = &f;
+    p->populate_passengers();
     int choice = 1;
     while (choice != 0)
     {
         switch (menu()){
             case 1:
-                p->displaySeatMap();
+                p->DisplaySeatMap(file);
                 Press_Enter();
                 break;
             case 2:
-                p->display_passenger();
+                p->display_passenger(file);
                 Press_Enter();
                 break;
             case 3:
-                p->add_passenger();
-                Press_Enter();
+                p->add_passenger(file);
                 break;
             case 4:
-                //p->sub_passenger();
-                Press_Enter();
+                p->sub_passenger(file);
                 break;
             case 5:
                 Press_Enter();
                 break;
             case 6:
                 choice = 0;
+                cout << "Program terminated.";
                 break;
         }
     }
@@ -52,6 +55,8 @@ int menu()
     cout << "4. Remove an Existing Passenger." << endl;
     cout << "5. Save Data." << endl;
     cout << "6. Quit." << endl;
+    cout << endl;
+    cout << "Enter your choice: (1, 2, 3, 4, 5, 6) " << endl;
     cin >> choice;
 
     return choice;
@@ -63,4 +68,13 @@ void Press_Enter()
     string temp;
     p->clean_standard();
     getline(cin, temp);
+}
+
+void intro()
+{
+    cout << "Version: 1.0" << endl;
+    cout << "Term Project - Flight Management Program in C++" << endl;
+    cout << "Produced by: Mohammed Zaid Shaikh, Navjot Saroa, and Shaheer Shakir" << endl;
+    cout << "Year: 2023" << endl;
+    cout << endl;
 }

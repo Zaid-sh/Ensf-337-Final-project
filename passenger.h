@@ -10,17 +10,20 @@ using namespace std;
 
 class Passenger{
     public:
-    string get_Fname()const { return pFname; }
-    string get_Lname()const { return pLname; }
-    string get_Phone()const { return pPhone; }
-    int get_ID()const { return pID; }
+    Passenger();
+    Passenger(string Fname, string Lname, string Phone, int ID);
+    string get_Fname()const { return pFname; };
+    string get_Lname()const { return pLname; };
+    string get_Phone()const { return pPhone; };
+    int get_ID()const { return pID; };
+    int get_pSeatrow()const { return pSeat->get_Row(); };
+    int get_pSeatcol()const;
+    int get_pSeatocc()const { return pSeat->get_Occ(); };
     void set_Fname(string Fname) { pFname = Fname; };
     void set_Lname(string Lname) { pLname = Lname; };
     void set_Phone(string Phone) { pPhone = Phone; };
     void set_ID(int ID) { pID = ID; };
-    void set_pSeat (int prow, char pcol, bool pOcc);
-    void clean_standard();
-    Passenger ();
+    void set_pSeat (int prow, char pcol, bool pOcc, int ID);
 
     private:
     string pFname;
