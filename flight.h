@@ -13,9 +13,9 @@ using namespace std;
 class Flight{
 public:
     Flight();
-    Flight(int num_rows, int num_cols);
-    Seat* getSeat(const string& seatNumber);
-    void displaySeatMap();
+    int get_numrows(string file)const;
+    int get_numcols(string file)const;
+    void displaySeatMap(string file);
     void sub_passenger(string file);
     void add_passenger(string file);
     void display_passenger(string file);
@@ -28,6 +28,6 @@ private:
     int num_cols;
     int num_pass;
     vector<Passenger> passengers;
-    vector<vector<Seat>> seatMap;
+
 };
 #endif

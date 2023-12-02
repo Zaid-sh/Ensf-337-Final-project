@@ -7,7 +7,6 @@ Flight::Flight()
     num_cols = 0;
     num_pass = 0;
     passengers;
-    seatMap;
 }
 
 void Flight::clean_standard()
@@ -19,32 +18,39 @@ void Flight::clean_standard()
     } while (leftover != '\n' && leftover != EOF);
 }
 
-Flight::Flight(int rows, int cols) : num_rows(rows), num_cols(cols) {
-    seatMap.resize(num_rows, vector<Seat>(num_cols));
-}
-#if 0
-Seat* Flight::getSeat(const string& seatNumber) {
-    for (auto& row : seatMap) {
-        for (Seat& seat : row) {
-            if (seat.getSeatNumber() == seatNumber) {
-                return &seat;
-            }
-        }
+int Flight::get_numrows(string file)const
+{
+    char s[8];
+    int row;
+    ifstream in(file);
+    if (in.fail())
+    {
+        cout << "File failed to open" << endl;
+        exit(1);
     }
-    return nullptr;
+
+    in.get(s, 8, '\n');
+    in >> row;
+
+    return row;
 }
 
-
-void Flight::displaySeatMap() const {
-
-    for (int i = 0; i < num_rows; i++) {
-        for (int j = 0; j < num_cols; j++) {
-            cout << seatMap[i][j].getSeatNumber() << " ";
-        }
-        cout << " ";
+int Flight::get_numcols(string file)const
+{
+    char s[14];
+    int col;
+    ifstream in(file);
+    if (in.fail())
+    {
+        cout << "File failed to open" << endl;
+        exit(1);
     }
+
+    in.get(s, 14, '\n');
+    in >> col;
+
+    return col;
 }
-#endif
 
 int Flight::occupied(int i, int j)
 {
@@ -58,18 +64,18 @@ int Flight::occupied(int i, int j)
     }
 }
 
-void Flight::displaySeatMap()
+void Flight::displaySeatMap(string file)
 {
     int j = 0;
     cout << "     ";
-    for (int i = 0; i < 5; ++i) {cout << (char)(i + 65) << "   ";}
+    for (int i = 0; i < get_numcols(file); ++i) {cout << (char)(i + 65) << "   ";}
     cout << endl;
-    for (int i = 0; i< 20; i++) {
+    for (int i = 0; i< get_numrows(file); i++) {
       cout << "   ";
-      for (int j = 0; j < 5; ++j) { cout << "+---";}
+      for (int j = 0; j < get_numcols(file); ++j) { cout << "+---";}
       cout << "+"<<endl;
 
-      for (j = 0; j < 5; ++j) {
+      for (j = 0; j < get_numcols(file); ++j) {
         if (j == 0)
             if (i < 9)
                 cout << i + 1 <<"  |";
@@ -87,7 +93,7 @@ void Flight::displaySeatMap()
 
     }
     cout << "   ";
-    for (int j1 = 0; j1 < 5; ++j1) {cout << "+---";}
+    for (int j1 = 0; j1 < get_numcols(file); ++j1) {cout << "+---";}
     cout << "+"<<endl;
 }
 
