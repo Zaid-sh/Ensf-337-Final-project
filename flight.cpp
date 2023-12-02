@@ -64,7 +64,7 @@ int Flight::occupied(int i, int j)
     }
 }
 
-void Flight::displaySeatMap(string file)
+void Flight::DisplaySeatMap(string file)
 {
     int j = 0;
     cout << "     ";

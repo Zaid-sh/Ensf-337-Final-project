@@ -15,7 +15,7 @@ public:
     Flight();
     int get_numrows(string file)const;
     int get_numcols(string file)const;
-    void displaySeatMap(string file);
+    void DisplaySeatMap(string file);
     void sub_passenger(string file);
     void add_passenger(string file);
     void display_passenger(string file);

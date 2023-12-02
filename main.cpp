@@ -19,7 +19,7 @@ int main()
     {
         switch (menu()){
             case 1:
-                p->displaySeatMap(file);
+                p->DisplaySeatMap(file);
                 Press_Enter();
                 break;
             case 2:
