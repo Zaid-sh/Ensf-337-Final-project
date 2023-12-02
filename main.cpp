@@ -30,7 +30,7 @@ int main()
                 p->add_passenger(file);
                 break;
             case 4:
-                //p->sub_passenger(file);
+                p->sub_passenger(file);
                 break;
             case 5:
                 Press_Enter();

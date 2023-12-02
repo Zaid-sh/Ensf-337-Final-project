@@ -11,14 +11,3 @@ Seat::Seat(int row, int column, bool occ, int PassID)
 Seat::Seat() : sRow(0), sColumn(0), sOcc(false), sPassID(0) {
 
 }
-#if 0
-Seat::~Seat()
-{
-	delete Seat;
-    delete sRow;
-    delete sColumn;
-    delete sOcc;
-    delete sPassID;
-    delete sFID;
-}
-#endif
