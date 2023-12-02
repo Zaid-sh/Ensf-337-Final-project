@@ -1,56 +1,153 @@
 
-#include "Flight.h"
+#include "flight.h"
 
-
-Flight::Flight(int rows, int cols) : num_rows(rows), num_cols(cols) {
-    seatMap.resize(num_rows, vector<Seat>(num_cols));
-}
-
-
-void Flight::addPassenger(const Passenger& passenger) {
-    passengers.push_back(passenger);
-}
-
-
-void Flight::removePassenger(const string& passengerID) {
-    passengers.erase(std::remove_if(passengers.begin(), passengers.end(),
-                                    [&](const Passenger& p) { return p.getID() == passengerID; }),
-                     passengers.end());
-}
-
-
-Seat* Flight::getSeat(const string& seatNumber) {
-    for (auto& row : seatMap) {
-        for (Seat& seat : row) {
-            if (seat.getSeatNumber() == seatNumber) {
-                return &seat;
-            }
-        }
-    }
-    return nullptr; 
-}
-
-
-void Flight::displaySeatMap() const {
-    for (const auto& row : seatMap) {
-        for (const Seat& seat : row) {
-            cout << (seat.isOccupied() ? "X" : "O") << " ";
-        }
-        cout << endl;
-    }
-}
-
-
-void Flight::sub_passenger()
+Flight::Flight()
 {
+    num_rows = 0;
+    num_cols = 0;
+    num_pass = 0;
+    passengers;
+}
 
-    ifstearm in ("flight_info.txt");
-    ofstream out("temp.txt", ofstream::out);
+void Flight::clean_standard()
+{
+    int leftover;
+    do{
+        leftover = cin.get();
 
+    } while (leftover != '\n' && leftover != EOF);
+}
+
+int Flight::get_numrows(string file)const
+{
+    char s[8];
+    int row;
+    ifstream in(file);
+    if (in.fail())
+    {
+        cout << "File failed to open" << endl;
+        exit(1);
+    }
+
+    in.get(s, 8, '\n');
+    in >> row;
+
+    return row;
+}
+
+int Flight::get_numcols(string file)const
+{
+    char s[14];
+    int col;
+    ifstream in(file);
+    if (in.fail())
+    {
+        cout << "File failed to open" << endl;
+        exit(1);
+    }
+
+    in.get(s, 14, '\n');
+    in >> col;
+
+    return col;
+}
+
+int Flight::occupied(int i, int j)
+{
+    for (const Passenger& passenger : passengers)
+    {
+        if ((i + 1) == passenger.get_pSeatrow() && j == passenger.get_pSeatcol())
+            if (passenger.get_pSeatocc() == true)
+                return 0;
+            else
+                return 1;
+    }
+}
+
+void Flight::DisplaySeatMap(string file)
+{
+    int j = 0;
+    cout << "     ";
+    for (int i = 0; i < get_numcols(file); ++i) {cout << (char)(i + 65) << "   ";}
+    cout << endl;
+    for (int i = 0; i< get_numrows(file); i++) {
+      cout << "   ";
+      for (int j = 0; j < get_numcols(file); ++j) { cout << "+---";}
+      cout << "+"<<endl;
+
+      for (j = 0; j < get_numcols(file); ++j) {
+        if (j == 0)
+            if (i < 9)
+                cout << i + 1 <<"  |";
+            else
+                cout << i + 1 <<" |";
+
+        if ( occupied(i, j) ) {
+          cout << "   |";
+        }
+        else {
+          cout << " X |";
+        }
+      }
+      cout << endl;
+
+    }
+    cout << "   ";
+    for (int j1 = 0; j1 < get_numcols(file); ++j1) {cout << "+---";}
+    cout << "+"<<endl;
+}
+
+
+
+void Flight::add_passenger(string file)
+{
+    string Fname, Lname, Phone;
+    int row, ID;
+    char col;
+
+    ofstream out(file, ios::app);
     if (out.fail())
     {
         cout << "File could not be opened"<< endl;
-        exit(1); 
+        exit(1);
+    }
+
+    cout << "Please enter the passenger's id: " << endl;
+    cin >> ID;
+    clean_standard();
+    cout << "Please enter the passenger's first name: " << endl;
+    getline(cin, Fname);
+    cout << "Please enter the passenger's last name: " << endl;
+    getline(cin, Lname);
+    cout << "Please enter the passenger's phone number: " << endl;
+    getline(cin, Phone);
+    cout << " " << endl;
+    cout << "Enter the passenger's desired row: " << endl;
+    cin >> row;
+    cout << "Enter the passenger's desired seat: " << endl;
+    cin >> col;
+    clean_standard();
+
+    out << '\n' << left << setw(20) << Fname << setw(20) << Lname << setw(20) << Phone << row << setw(1) << col << right << setw(6) << ID;
+
+    num_pass++;
+    Passenger newPassenger(Fname, Lname, Phone, ID);
+    newPassenger.set_pSeat(row, col, 1, ID);
+    passengers.push_back(newPassenger);
+
+    out.close();
+}
+
+void Flight::sub_passenger(string file)
+{
+    int ID;
+
+    ifstearm in (file);
+    ofstream out("temp.txt", ofstream::out);
+    if (out.fail())
+    {
+        cout << "File could not be opened"<< endl;
+        exit(1);
     }
 
     if (in.fail())
@@ -59,28 +156,26 @@ void Flight::sub_passenger()
         exit(1); 
     }
 
-    out.open("temp.txt", ofstream::out);
-
     cout << "Please enter the ID of the passenger that needs to be removed: " << endl;
-    cin >> pID;
+    cin >> ID;
 
     char c;
-    int removeID = stoi(pID);
-    vector<Passenger> tempVector = new Passenger[Passengers.size() - 1];
-    for (int i = 0; i < Passengers.size(); i++) {
-        if (Passengers[i].pID == removeID) {
-            Passengers[i].pSeat->sOcc = 0;
-            Passengers.erase(i);
+    int removeID = stoi(ID);
+    tempVector = new Passenger[passengers.size() - 1];
+    for (int i = 0; i < passengers.size(); i++) {
+        if (passengers[i].pID == removeID) {
+            passengers[i].pSeat->sOcc = 0;
+            passengers.erase(i);
         }
         else {
             while (in.get(c)) {
                 out << c; 
             }
-            tempVector.push_back(Passengers[i]);
+            tempVector.push_back(passengers[i]);
         }
     }
 
-    Passengers.clear();
+    passengers.clear();
     Passengers.resize(Passengers.size() - 1);
     for (int j = 0; j < Passengers.size(); j++){
         Passengers.push_back(tempVector[j]);
@@ -90,6 +185,135 @@ void Flight::sub_passenger()
     in.close();
     remove("flight_info.txt");
     rename("temp.txt", "flight_info.txt");
-   
+
 }
 
+void Flight::display_passenger(string file)
+{
+    cout << setw(20) << left << "First Name"
+            << setw(20) << left << "Last Name"
+            << setw(20) << left << "Phone"
+            << setw(7) << left << "Row"
+            << setw(10) << left << "Seat"
+            << setw(10) << left << "ID"
+            << endl;
+    cout << setfill('-') << setw(82) << "" << setfill(' ') << endl;
+
+    char s[21];
+    string dFname, dLname, dphone;
+    int row, ID, i = 0;
+    char col;
+    ifstream in(file);
+    if (in.fail())
+    {
+        cout << "File failed to open" << endl;
+        exit(1);
+    }
+
+    in.getline(s,21);
+
+    do {
+        i++;
+        switch (i){
+            case 1:
+                in.get(s, 21, '\n');
+                dFname = s;
+                break;
+
+            case 2:
+                in.get(s, 21, '\n');
+                dLname = s;
+                break;
+
+            case 3:
+                in.get(s, 21, '\n');
+                dphone = s;
+                break;
+
+            case 4:
+                in >> row;
+                break;
+
+            case 5:
+                in >> col;
+                break;
+
+            case 6:
+                in >> ID;
+                break;
+
+            case 7:
+                cout << setw(15) << left << dFname
+                        << setw(15) << left << dLname
+                        << setw(15) << left << dphone
+                        << setw(7) << left << row
+                        << setw(10) << left << col
+                        << setw(10) << left << ID
+                        << endl;
+                cout << setfill('-') << setw(82) << "" << setfill(' ') << endl;
+                i = 0;
+                in.getline(s,1);
+                break;
+        }
+
+    }while( in );
+
+    in.close();
+}
+
+void Flight::populate_passengers()
+{
+    char s[21];
+    string Fname, Lname, phone;
+    int row, ID, i = 0;
+    char col;
+    ifstream in("flight_info.txt");
+    if (in.fail())
+    {
+        cout << "File failed to open" << endl;
+        exit(1);
+    }
+    in.getline(s,21);
+
+    do {
+        i++;
+        switch (i){
+            case 1:
+                in.get(s, 21, '\n');
+                Fname = s;
+                break;
+
+            case 2:
+                in.get(s, 21, '\n');
+                Lname = s;
+                break;
+
+            case 3:
+                in.get(s, 21, '\n');
+                phone = s;
+                break;
+
+            case 4:
+                in >> row;
+                break;
+
+            case 5:
+                in >> col;
+                break;
+
+            case 6:
+                in >> ID;
+                break;
+
+            case 7:
+                num_pass++;
+                Passenger newPassenger(Fname, Lname, phone, ID);
+                newPassenger.set_pSeat(row, col, 1, ID);
+                passengers.push_back(newPassenger);
+                i = 0;
+                in.getline(s,1);
+                break;
+        }
+
+    }while( in );
+}
