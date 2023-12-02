@@ -15,12 +15,13 @@ public:
     Flight();
     Flight(int num_rows, int num_cols);
     Seat* getSeat(const string& seatNumber);
-    void displaySeatMap() const;
+    void displaySeatMap();
     void sub_passenger(string file);
     void add_passenger(string file);
     void display_passenger(string file);
     void clean_standard();
     void populate_passengers();
+    int occupied(int i, int j);
 
 private:
     int num_rows;

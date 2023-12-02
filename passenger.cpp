@@ -28,3 +28,10 @@ Passenger::Passenger(string Fname, string Lname, string Phone, int ID)
     pID = ID;
     pSeat = nullptr;
 }
+
+int Passenger::get_pSeatcol()const
+{
+    char letter = pSeat->get_Column();
+    int num = letter - 65;
+    return num;
+}

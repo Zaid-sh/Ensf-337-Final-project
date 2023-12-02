@@ -46,10 +46,52 @@ void Flight::displaySeatMap() const {
 }
 #endif
 
-void Flight::displaySeatMap() const
+int Flight::occupied(int i, int j)
 {
-
+    for (const Passenger& passenger : passengers)
+    {
+        if ((i + 1) == passenger.get_pSeatrow() && j == passenger.get_pSeatcol())
+            if (passenger.get_pSeatocc() == true)
+                return 0;
+            else
+                return 1;
+    }
 }
+
+void Flight::displaySeatMap()
+{
+    int j = 0;
+    cout << "     ";
+    for (int i = 0; i < 5; ++i) {cout << (char)(i + 65) << "   ";}
+    cout << endl;
+    for (int i = 0; i< 20; i++) {
+      cout << "   ";
+      for (int j = 0; j < 5; ++j) { cout << "+---";}
+      cout << "+"<<endl;
+
+      for (j = 0; j < 5; ++j) {
+        if (j == 0)
+            if (i < 9)
+                cout << i + 1 <<"  |";
+            else
+                cout << i + 1 <<" |";
+
+        if ( occupied(i, j) ) {
+          cout << "   |";
+        }
+        else {
+          cout << " X |";
+        }
+      }
+      cout << endl;
+
+    }
+    cout << "   ";
+    for (int j1 = 0; j1 < 5; ++j1) {cout << "+---";}
+    cout << "+"<<endl;
+}
+
+
 
 void Flight::add_passenger(string file)
 {
@@ -82,6 +124,7 @@ void Flight::add_passenger(string file)
 
     out << '\n' << left << setw(20) << Fname << setw(20) << Lname << setw(20) << Phone << row << setw(1) << col << right << setw(6) << ID;
 
+    num_pass++;
     Passenger newPassenger(Fname, Lname, Phone, ID);
     newPassenger.set_pSeat(row, col, 1, ID);
     passengers.push_back(newPassenger);
@@ -142,6 +185,7 @@ void Flight::display_passenger(string file)
         cout << "File failed to open" << endl;
         exit(1);
     }
+
     in.getline(s,21);
 
     do {
@@ -172,7 +216,6 @@ void Flight::display_passenger(string file)
 
             case 6:
                 in >> ID;
-                in.getline(s,21);
                 break;
 
             case 7:
@@ -185,10 +228,11 @@ void Flight::display_passenger(string file)
                         << endl;
                 cout << setfill('-') << setw(82) << "" << setfill(' ') << endl;
                 i = 0;
+                in.getline(s,1);
                 break;
         }
 
-    }while( !in.eof() );
+    }while( in );
 
     in.close();
 }
@@ -235,16 +279,17 @@ void Flight::populate_passengers()
 
             case 6:
                 in >> ID;
-                in.getline(s,21);
                 break;
 
             case 7:
+                num_pass++;
                 Passenger newPassenger(Fname, Lname, phone, ID);
                 newPassenger.set_pSeat(row, col, 1, ID);
                 passengers.push_back(newPassenger);
                 i = 0;
+                in.getline(s,1);
                 break;
         }
 
-    }while( !in.eof() );
+    }while( in );
 }
