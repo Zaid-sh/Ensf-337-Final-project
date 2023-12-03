@@ -59,12 +59,13 @@ int Flight::occupied(int i, int j)
 {
     for (const Passenger& passenger : passengers)
     {
-        if ((i + 1) == passenger.get_pSeatrow() && j == passenger.get_pSeatcol())
+        if ((i + 1) == passenger.get_pSeatrow() && j == passenger.get_pSeatcol()){
             if (passenger.get_pSeatocc() == true)
                 return 0;
             else
-                return 1;       
+                return 1;       }
     }
+    return 1;
 }
 
 void Flight::DisplaySeatMap(string file)
@@ -140,6 +141,8 @@ void Flight::add_passenger(string file)
 
     out.close();
 }
+
+
 void Flight::sub_passenger(string file)
 {
     
@@ -164,10 +167,8 @@ void Flight::sub_passenger(string file)
 
     cout << "Please enter the ID of the passenger that needs to be removed: " << endl;
     cin >> ID;
-
-    char c;
     int removeID = ID;
-    vector<Passenger> tempVector; //= new Passenger[passengers.size() - 1]
+
 
     
     string tp;
@@ -175,12 +176,15 @@ void Flight::sub_passenger(string file)
     MyFile << tp << endl;
     MyFile.close();
 
+
+
     for (int i = 0; i < passengers.size()+1; i++) {
         getline(in, tp);
         int pID = passengers[i].get_ID();
         if (pID == removeID) {
             passengers[i].set_pSeat(passengers[i].get_pSeatrow(), passengers[i].get_pSeatcol() + 65, false, 0);
             passengers.erase(passengers.begin() + i);
+
         
         }
         else {
@@ -188,9 +192,10 @@ void Flight::sub_passenger(string file)
             MyFile.open("filename.txt", ios::app);
             MyFile << tp << endl;
             MyFile.close();
-            tempVector.push_back(passengers[i]);
+
         }
     }
+
 
     MyFile.close();
     in.close();
