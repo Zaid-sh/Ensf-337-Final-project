@@ -1,4 +1,7 @@
-
+#include <fstream>
+#include <iostream>
+#include <string>
+using namespace std;
 #include "flight.h"
 
 Flight::Flight()
@@ -60,7 +63,7 @@ int Flight::occupied(int i, int j)
             if (passenger.get_pSeatocc() == true)
                 return 0;
             else
-                return 1;
+                return 1;       
     }
 }
 
@@ -142,33 +145,58 @@ void Flight::sub_passenger(string file)
 {
     int ID;
 
-    ofstream out(file, ios::app);
-    if (out.fail())
+    ifstream in (file);
+    ofstream MyFile("filename.txt");
+
+  
+    if (MyFile.fail())
     {
         cout << "File could not be opened"<< endl;
         exit(1);
     }
 
+    if (in.fail())
+    {
+        cout << "File could not be opened"<< endl;
+        exit(1); 
+    }
+
+
     cout << "Please enter the ID of the passenger that needs to be removed: " << endl;
     cin >> ID;
 
-    int removeID = stoi(ID);
-    tempVector = new Passenger[passengers.size() - 1];
-    for (int i = 0; i < passengers.size(); i++) {
-        if (passengers[i].pID == removeID) {
-            passengers[i].pSeat->sOcc = 0;
-            passengers.erase(i);
+    char c;
+    int removeID = ID;
+    vector<Passenger> tempVector; //= new Passenger[passengers.size() - 1]
+
+    
+    string tp;
+    getline(in, tp);
+    MyFile << tp << endl;
+    MyFile.close();
+
+    for (int i = 0; i < passengers.size()+1; i++) {
+        getline(in, tp);
+        int pID = passengers[i].get_ID();
+        if (pID == removeID) {
+            passengers[i].set_pSeat(passengers[i].get_pSeatrow(), passengers[i].get_pSeatcol() + 65, false, 0);
+            passengers.erase(passengers.begin() + i);
+        
         }
         else {
+
+            MyFile.open("filename.txt", ios::app);
+            MyFile << tp << endl;
+            MyFile.close();
             tempVector.push_back(passengers[i]);
         }
     }
 
-    passengers.clear();
-    Passengers.resize(Passengers.size() - 1);
-    for (int j = 0; j < Passengers.size(); j++){
-        Passengers.push_back(tempVector[j]);
-    }
+    MyFile.close();
+    in.close();
+    remove("flight_info.txt");
+    rename("filename.txt", "flight_info.txt");
+ 
 
 }
 
