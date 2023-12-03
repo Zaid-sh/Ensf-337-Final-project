@@ -137,7 +137,7 @@ void Flight::add_passenger(string file)
 
     out.close();
 }
-
+#if 0
 void Flight::sub_passenger(string file)
 {
     int ID;
@@ -171,7 +171,7 @@ void Flight::sub_passenger(string file)
     }
 
 }
-
+#endif
 void Flight::display_passenger(string file)
 {
     cout << setw(20) << left << "First Name"
@@ -185,7 +185,7 @@ void Flight::display_passenger(string file)
 
     char s[21];
     string dFname, dLname, dphone;
-    int row, ID, i = 0;
+    int row, ID, i = 0, j = 0;
     char col;
     ifstream in(file);
     if (in.fail())
@@ -236,7 +236,8 @@ void Flight::display_passenger(string file)
                         << endl;
                 cout << setfill('-') << setw(82) << "" << setfill(' ') << endl;
                 i = 0;
-                in.getline(s,1);
+                j++;
+                in.getline(s,21);
                 break;
         }
 
@@ -295,7 +296,7 @@ void Flight::populate_passengers()
                 newPassenger.set_pSeat(row, col, 1, ID);
                 passengers.push_back(newPassenger);
                 i = 0;
-                in.getline(s,1);
+                in.getline(s, 21);
                 break;
         }
 

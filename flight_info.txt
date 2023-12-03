@@ -6,3 +6,4 @@ Kim                 Harris              403-100-0001        6D  10003
 Bill                Moore DAVIS         403-020-0020        15B 10004
 Ali                 Hassan              403-003-0300        19D 10005
 Martine Olivier     Van Paris           403-100-3000        16E 10006
+Mariam              Wright              403-000-1234        19A 10007
