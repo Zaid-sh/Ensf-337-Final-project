@@ -140,7 +140,6 @@ void Flight::add_passenger(string file)
 
     out.close();
 }
-#if 0
 void Flight::sub_passenger(string file)
 {
     
@@ -200,7 +199,7 @@ void Flight::sub_passenger(string file)
  
 
 }
-#endif
+
 void Flight::display_passenger(string file)
 {
     cout << setw(20) << left << "First Name"
