@@ -143,6 +143,7 @@ void Flight::add_passenger(string file)
 
 void Flight::sub_passenger(string file)
 {
+    
     int ID;
 
     ifstream in (file);
