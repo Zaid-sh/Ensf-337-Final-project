@@ -19,7 +19,7 @@ class Seat{
     void set_Column(int colN) { sColumn = colN; }
     Seat();
     Seat (int row, int column, bool occ, int PassID);
-    ~Seat();
+
 
     private:
     int sRow;
